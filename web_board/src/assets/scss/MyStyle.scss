@@ -1,0 +1,16 @@
+
+
+// scss main
+@use "./mixins/variable";
+@use "./mixins/main";
+@use "./mixins/typograpy";
+
+// scss component
+@use "./mixins/button";
+@use "./mixins/table";
+@use "./mixins/modal";
+@use "./mixins/form";
+
+// scss page
+@use "./pages/login";
+@use "./pages/layout";
