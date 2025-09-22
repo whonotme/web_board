@@ -1,61 +1,28 @@
 # dev mode
-version: "3"
-services:
-  frontend:
-    build: ./web_board
-    container_name: myapp-frontend
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./web_board:/app
-      - /app/node_modules
-    command: npm run dev -- --host 0.0.0.0
-    depends_on:
-      - backend
-    networks:
-    - webnet
-
-  backend:
-    build: ./api
-    container_name: myapp-backend
-    ports:
-      - "5050:5050"
-    volumes:
-      - ./api:/app
-      - /app/node_modules
-
-  nginx:
-    build: ./nginx
-    container_name: content-nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - frontend
-      - backend
-    networks:
-      - webnet
-
-networks:
-  webnet:
-
-# producetion
 # version: "3"
 # services:
 #   frontend:
 #     build: ./web_board
 #     container_name: myapp-frontend
 #     ports:
-#       - "5173:80"
+#       - "5173:5173"
+#     volumes:
+#       - ./web_board:/app
+#       - /app/node_modules
+#     command: npm run dev -- --host 0.0.0.0
+#     depends_on:
+#       - backend
 #     networks:
-#       - webnet
+#     - webnet
 
 #   backend:
 #     build: ./api
 #     container_name: myapp-backend
 #     ports:
 #       - "5050:5050"
-#     networks:
-#       - webnet
+#     volumes:
+#       - ./api:/app
+#       - /app/node_modules
 
 #   nginx:
 #     build: ./nginx
@@ -70,3 +37,36 @@ networks:
 
 # networks:
 #   webnet:
+
+# producetion
+version: "3"
+services:
+  frontend:
+    build: ./web_board
+    container_name: myapp-frontend
+    ports:
+      - "5173:80"
+    networks:
+      - webnet
+
+  backend:
+    build: ./api
+    container_name: myapp-backend
+    ports:
+      - "5050:5050"
+    networks:
+      - webnet
+
+  nginx:
+    build: ./nginx
+    container_name: content-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - webnet
+
+networks:
+  webnet:
